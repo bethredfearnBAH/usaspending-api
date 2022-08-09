@@ -1,0 +1,24 @@
+let
+    url = "https://api.usaspending.gov/api/v2/search/spending_by_geography/",
+    body = "{
+        ""scope"": ""recipient_location"",
+        ""geo_layer"": ""district"",
+        ""filters"": {
+            ""time_period"": [
+                {
+                    ""start_date"": ""2020-10-01"",
+                    ""end_date"": ""2021-09-30""
+                }
+            ],
+            ""recipient_locations"": [
+                {
+                    ""state"": ""FL"",
+                    ""country"": ""USA"",
+                    ""district"": ""08""
+                }
+            ]
+        }
+    }",
+    Source = Json.Document(Web.Contents(url,[Content=Text.ToBinary(body),Headers=[#"Content-Type"="application/json"]]))
+in
+    Source
